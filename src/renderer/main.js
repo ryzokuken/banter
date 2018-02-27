@@ -1,4 +1,6 @@
 import Vue from 'vue';
+/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
+import { ipcRenderer as ipc } from 'electron';
 
 import App from './App';
 import router from './router';
@@ -13,3 +15,5 @@ new Vue({
   store,
   template: '<App/>',
 }).$mount('#app');
+
+ipc.on('message', (event, data) => console.log(data));

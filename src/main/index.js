@@ -1,4 +1,15 @@
 import { app, BrowserWindow } from 'electron'; // eslint-disable-line
+import irc from 'irc';
+
+let mainWindow;
+
+const client = new irc.Client('chat.freenode.net', 'juju');
+
+client.addListener('raw', (msg) => {
+  if (mainWindow) {
+    mainWindow.webContents.send('message', msg);
+  }
+});
 
 /**
  * Set `__static` path to static files in production
@@ -11,7 +22,6 @@ if (process.env.NODE_ENV !== 'development') {
     .replace(/\\/g, '\\\\'); // eslint-disable-line
 }
 
-let mainWindow;
 const winURL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:9080'
