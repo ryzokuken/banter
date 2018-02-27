@@ -5,6 +5,7 @@ import { app, BrowserWindow } from 'electron'; // eslint-disable-line
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
+  /* eslint no-underscore-dangle: ["error", { "allow": ["__static"] }] */
   global.__static = require('path')
     .join(__dirname, '/static')
     .replace(/\\/g, '\\\\'); // eslint-disable-line
