@@ -8,10 +8,13 @@ import router from './router';
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
-new Vue({
+const vm = new Vue({
   components: { App },
   router,
   template: '<App/>',
+  data: {
+    messages: [],
+  },
 }).$mount('#app');
 
-ipc.on('message', (event, data) => console.log(data));
+ipc.on('message', (event, data) => vm.messages.push(data));
