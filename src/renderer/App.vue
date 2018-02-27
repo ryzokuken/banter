@@ -7,6 +7,7 @@
 <script>
 export default {
   name: 'banter',
+  props: ['messages'],
 };
 </script>
 

@@ -11,7 +11,7 @@ Vue.config.productionTip = false;
 const vm = new Vue({
   components: { App },
   router,
-  template: '<App/>',
+  template: '<App :messages="messages" />',
   data: {
     messages: [],
   },
