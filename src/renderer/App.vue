@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
+    <ul>
+      <li v-for="(message, index) in messages" :key="index">{{ message }}</li>
+    </ul>
   </div>
 </template>
 
