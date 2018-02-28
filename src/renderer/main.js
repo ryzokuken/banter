@@ -4,14 +4,14 @@ import { ipcRenderer as ipc } from 'electron';
 import 'modern-normalize/modern-normalize.css';
 
 import App from './App';
-import router from './router';
+// import router from './router';
 
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 const vm = new Vue({
   components: { App },
-  router,
+  // router,
   template: '<App :messages="messages.globals" />',
   data: {
     messages: {
