@@ -6,8 +6,23 @@ let mainWindow;
 const client = new irc.Client('chat.freenode.net', 'juju');
 
 client.addListener('raw', (msg) => {
-  if (mainWindow) {
-    mainWindow.webContents.send('message', msg);
+  switch (msg.commandType) {
+    case 'error':
+      return mainWindow.webContents.send('error', msg);
+    case 'normal':
+      switch (msg.command) {
+        case 'NOTICE':
+        case '378':
+          return mainWindow.webContents.send('notice', msg);
+        case 'PONG':
+          return mainWindow.webContents.send('pong');
+        default:
+          return mainWindow.webContents.send('unhandled', msg);
+      }
+    case 'reply':
+      return mainWindow.webContents.send('reply', msg);
+    default:
+      throw new Error('Unexpected command type', msg);
   }
 });
 

@@ -12,10 +12,16 @@ Vue.config.productionTip = false;
 const vm = new Vue({
   components: { App },
   router,
-  template: '<App :messages="messages" />',
+  template: '<App :messages="messages.globals" />',
   data: {
-    messages: [],
+    messages: {
+      globals: [],
+    },
   },
 }).$mount('#app');
 
-ipc.on('message', (event, data) => vm.messages.push(data));
+ipc.on('notice', (event, data) => vm.messages.globals.push(data));
+ipc.on('error', (event, data) => vm.messages.globals.push(data));
+ipc.on('reply', (event, data) => vm.messages.globals.push(data));
+ipc.on('pong', () => console.log('PONG'));
+ipc.on('unhandled', (event, data) => console.log(data));

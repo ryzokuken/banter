@@ -3,7 +3,9 @@
     <nav>hello world</nav>
     <main>
       <ul class="messages">
-        <li v-for="(message, index) in messages" :key="index">{{ message }}</li>
+        <li v-for="(message, index) in messages" :key="index">
+          <message :type="message.commandType" :args="message.args"></message>
+        </li>
       </ul>
       <textarea placeholder="Send a message"></textarea>
       <!-- <router-view></router-view> -->
@@ -12,9 +14,14 @@
 </template>
 
 <script>
+import Message from '@/components/Message';
+
 export default {
   name: 'banter',
   props: ['messages'],
+  components: {
+    Message,
+  },
 };
 </script>
 
@@ -41,7 +48,7 @@ export default {
   color: #212121;
   line-height: 1.5;
   list-style: none;
-  padding: 10px;
+  padding: 0;
 }
 
 .container > main > textarea {
