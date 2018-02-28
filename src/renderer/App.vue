@@ -38,6 +38,10 @@ export default {
   overflow-x: scroll;
   font-size: 18px;
   margin: 0;
+  color: #212121;
+  line-height: 1.5;
+  list-style: none;
+  padding: 10px;
 }
 
 .container > main > textarea {
