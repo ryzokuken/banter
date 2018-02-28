@@ -19,10 +19,6 @@ export default {
 </script>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
 .container {
   display: grid;
   grid-template-columns: 200px auto;
@@ -41,6 +37,7 @@ export default {
   height: calc(100vh - 70px);
   overflow-x: scroll;
   font-size: 18px;
+  margin: 0;
 }
 
 .container > main > textarea {

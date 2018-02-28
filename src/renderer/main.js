@@ -1,6 +1,7 @@
 import Vue from 'vue';
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 import { ipcRenderer as ipc } from 'electron';
+import 'modern-normalize/modern-normalize.css';
 
 import App from './App';
 import router from './router';
