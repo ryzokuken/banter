@@ -1,9 +1,13 @@
 <template>
-  <div id="app">
-    <!-- <router-view></router-view> -->
-    <ul>
-      <li v-for="(message, index) in messages" :key="index">{{ message }}</li>
-    </ul>
+  <div class="container">
+    <nav>hello world</nav>
+    <main>
+      <ul class="messages">
+        <li v-for="(message, index) in messages" :key="index">{{ message }}</li>
+      </ul>
+      <textarea placeholder="Send a message"></textarea>
+      <!-- <router-view></router-view> -->
+    </main>
   </div>
 </template>
 
@@ -15,5 +19,39 @@ export default {
 </script>
 
 <style>
-/* CSS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+.container {
+  display: grid;
+  grid-template-columns: 200px auto;
+
+  height: 100vh;
+  width: 100vw;
+
+  overflow: hidden;
+}
+
+.container > nav {
+  border-right: 1px solid #bdbdbd;
+}
+
+.container > main > .messages {
+  height: calc(100vh - 70px);
+  overflow-x: scroll;
+  font-size: 18px;
+}
+
+.container > main > textarea {
+  width: 100%;
+  height: 70px;
+
+  outline: none;
+  border: none;
+  border-top: 1px solid #bdbdbd;
+  font-size: 18px;
+  padding: 10px;
+  resize: none;
+}
 </style>
