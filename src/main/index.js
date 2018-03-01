@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'; // eslint-disable-line
+import { app, BrowserWindow, ipcMain as ipc } from 'electron'; // eslint-disable-line
 import irc from 'irc';
 
 let mainWindow;
@@ -71,6 +71,10 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+ipc.on('join', (event, data) => {
+  client.join(data);
 });
 
 /**

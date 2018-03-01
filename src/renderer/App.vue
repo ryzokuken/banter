@@ -7,7 +7,7 @@
           <message :type="message.commandType" :args="message.args"></message>
         </li>
       </ul>
-      <textarea placeholder="Send a message"></textarea>
+      <textarea placeholder="Send a message" v-model="text" @keyup.enter="handleSend"></textarea>
       <!-- <router-view></router-view> -->
     </main>
   </div>
@@ -21,6 +21,17 @@ export default {
   props: ['messages'],
   components: {
     Message,
+  },
+  data() {
+    return {
+      text: '',
+    };
+  },
+  methods: {
+    handleSend() {
+      this.$emit('message', this.text.trim());
+      this.text = '';
+    },
   },
 };
 </script>
