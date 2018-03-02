@@ -5,26 +5,12 @@ let mainWindow;
 
 const client = new irc.Client('chat.freenode.net', 'juju');
 
-client.addListener('raw', (msg) => {
-  switch (msg.commandType) {
-    case 'error':
-      return mainWindow.webContents.send('error', msg);
-    case 'normal':
-      switch (msg.command) {
-        case 'NOTICE':
-        case '378':
-          return mainWindow.webContents.send('notice', msg);
-        case 'PONG':
-          return mainWindow.webContents.send('pong');
-        default:
-          return mainWindow.webContents.send('unhandled', msg);
-      }
-    case 'reply':
-      return mainWindow.webContents.send('reply', msg);
-    default:
-      throw new Error('Unexpected command type', msg);
-  }
-});
+client.addListener('notice', (nick, to, text, msg) =>
+  mainWindow.webContents.send('notice', { nick, to, text, msg }),
+);
+client.addListener('motd', msg => mainWindow.webContents.send('motd', msg));
+client.addListener('error', msg => mainWindow.webContents.send('error', msg.args[1]));
+client.addListener('registered', msg => mainWindow.webContents.send('reply', msg.args[1]));
 
 /**
  * Set `__static` path to static files in production

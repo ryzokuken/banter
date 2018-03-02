@@ -4,7 +4,7 @@
     <main>
       <ul class="messages">
         <li v-for="(message, index) in messages" :key="index">
-          <message :type="message.commandType" :args="message.args"></message>
+          <message :type="message.type" :text="message.text"></message>
         </li>
       </ul>
       <textarea placeholder="Send a message" v-model="text" @keyup.enter="handleSend"></textarea>
@@ -53,7 +53,7 @@ export default {
 
 .container > main > .messages {
   height: calc(100vh - 70px);
-  overflow-x: scroll;
+  overflow: scroll;
   font-size: 18px;
   margin: 0;
   color: #212121;

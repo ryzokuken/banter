@@ -44,8 +44,8 @@ const vm = new Vue({
   },
 }).$mount('#app');
 
-ipc.on('notice', (event, data) => vm.messages.globals.push(data));
-ipc.on('error', (event, data) => vm.messages.globals.push(data));
-ipc.on('reply', (event, data) => vm.messages.globals.push(data));
-ipc.on('pong', () => console.log('PONG'));
+ipc.on('notice', (event, { text }) => vm.messages.globals.push({ type: 'notice', text }));
+ipc.on('error', (event, text) => vm.messages.globals.push({ type: 'error', text }));
+ipc.on('reply', (event, text) => vm.messages.globals.push({ type: 'reply', text }));
+ipc.on('motd', (event, text) => vm.messages.globals.push({ type: 'preformatted', text }));
 ipc.on('unhandled', (event, data) => console.log(data));
